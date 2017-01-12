@@ -37,7 +37,7 @@ class plugin_info
     static $PLUGIN_CODE = "KanaNumCheck";
 
     /** プラグイン名(必須)：プラグイン管理・画面出力（エラーメッセージetc）にはこの値が出力されます。 */
-    static $PLUGIN_NAME = "エラーチェックに数字とカナのみ許可を追加";
+    static $PLUGIN_NAME = "エラーチェックのカタカナの判定拡張";
 
     /** プラグインメインクラス名(必須)：本体がプラグインを実行する際に呼ばれるクラス。拡張子は不要です。 */
     static $CLASS_NAME = "KanaNumCheck";
@@ -52,7 +52,7 @@ class plugin_info
     static $AUTHOR = "kurozumi";
 
     /** 説明(必須) */
-    static $DESCRIPTION = "エラーチェックに数字とカナのみ許可を追加するプラグインです。";
+    static $DESCRIPTION = "addParam関数にKANANUM_CHECKを指定すると、入力文字がカナと数字以外ならエラーを返します。";
 
     /** 作者用のサイトURL：設定されている場合はプラグイン管理画面の作者名がリンクになります。 */
     static $AUTHOR_SITE_URL = "http://a-zumi.net";

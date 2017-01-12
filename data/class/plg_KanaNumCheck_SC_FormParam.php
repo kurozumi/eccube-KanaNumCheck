@@ -25,15 +25,49 @@ require_once CLASS_REALDIR . 'SC_FormParam.php';
 
 class plg_KanaNumCheck_SC_FormParam extends SC_FormParam
 {
-    // エラーチェック
+    /**
+     * エラーチェック
+     * 
+     * EC-CUBE本体のcheckError関数ではswith文のdefaultでメッセージが登録されなければ、
+     * もっとシンプルにメッセージの拡張できるのですが。
+     * 
+     * @param type $br
+     * @return type
+     */
     public function checkError($br = true)
     {
         $arrErr = parent::checkError($br);
-        
+
         foreach ($this->keyname as $index => $key) {
             foreach ($this->arrCheck[$index] as $func) {
                 $value = $this->getValue($key);
                 switch ($func) {
+                    case 'EXIST_CHECK':
+                    case 'NUM_CHECK':
+                    case 'EMAIL_CHECK':
+                    case 'EMAIL_CHAR_CHECK':
+                    case 'ALNUM_CHECK':
+                    case 'GRAPH_CHECK':
+                    case 'KANA_CHECK':
+                    case 'URL_CHECK':
+                    case 'IP_CHECK':
+                    case 'SPTAB_CHECK':
+                    case 'ZERO_CHECK':
+                    case 'ALPHA_CHECK':
+                    case 'ZERO_START':
+                    case 'FIND_FILE':
+                    case 'NO_SPTAB':
+                    case 'DIR_CHECK':
+                    case 'DOMAIN_CHECK':
+                    case 'FILE_NAME_CHECK':
+                    case 'MOBILE_EMAIL_CHECK':
+                    case 'MAX_LENGTH_CHECK':
+                    case 'MIN_LENGTH_CHECK':
+                    case 'NUM_COUNT_CHECK':
+                    case 'KANABLANK_CHECK':
+                    case 'SELECT_CHECK':
+                    case 'FILE_NAME_CHECK_BY_NOUPLOAD':
+                    case 'NUM_POINT_CHECK':
                     case 'KANANUM_CHECK':
                         $this->recursionCheck($this->disp_name[$index], $func,
                             $value, $arrErr[$key], $this->length[$index]);
@@ -41,7 +75,26 @@ class plg_KanaNumCheck_SC_FormParam extends SC_FormParam
                             unset($arrErr[$key]);
                         }
                         break;
-
+                    // 小文字に変換
+                    case 'CHANGE_LOWER':
+                        $this->toLower($key);
+                        break;
+                    // ファイルの存在チェック
+                    case 'FILE_EXISTS':
+                        if ($value != '' && !file_exists($this->check_dir . $value)) {
+                            $arrErr[$key] = '※ ' . $this->disp_name[$index] . 'のファイルが存在しません。<br>';
+                        }
+                        break;
+                    // ダウンロード用ファイルの存在チェック
+                    case 'DOWN_FILE_EXISTS':
+                        if ($value != '' && !file_exists(DOWN_SAVE_REALDIR . $value)) {
+                            $arrErr[$key] = '※ ' . $this->disp_name[$index] . 'のファイルが存在しません。<br>';
+                        }
+                        break;
+                    default:
+                        // これがなければエラーメッセージを拡張できる。
+                        //$arrErr[$key] = "※※　エラーチェック形式($func)には対応していません　※※ <br>";
+                        break;
                 }
             }
 
