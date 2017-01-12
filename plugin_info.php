@@ -37,7 +37,7 @@ class plugin_info
     static $PLUGIN_CODE = "KanaNumCheck";
 
     /** プラグイン名(必須)：プラグイン管理・画面出力（エラーメッセージetc）にはこの値が出力されます。 */
-    static $PLUGIN_NAME = "エラーチェックのカタカナの判定拡張";
+    static $PLUGIN_NAME = "エラーチェックのカタカナ判定の拡張プラグイン";
 
     /** プラグインメインクラス名(必須)：本体がプラグインを実行する際に呼ばれるクラス。拡張子は不要です。 */
     static $CLASS_NAME = "KanaNumCheck";
