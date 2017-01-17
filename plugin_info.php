@@ -52,7 +52,7 @@ class plugin_info
     static $AUTHOR = "kurozumi";
 
     /** 説明(必須) */
-    static $DESCRIPTION = "addParam関数にKANANUM_CHECKを指定すると、入力文字がカナと数字以外ならエラーを返します。";
+    static $DESCRIPTION = "addParamメソッドにKANANUM_CHECKを指定すると、入力文字がカナと数字以外ならエラーを返します。";
 
     /** 作者用のサイトURL：設定されている場合はプラグイン管理画面の作者名がリンクになります。 */
     static $AUTHOR_SITE_URL = "http://a-zumi.net";
